@@ -1,16 +1,72 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-brand-50: #f0fdf4;
-  --color-brand-100: #dcfce7;
-  --color-brand-500: #22c55e;
-  --color-brand-600: #16a34a;
-  --color-brand-700: #15803d;
-  --color-brand-800: #166534;
-  --color-brand-900: #14532d;
+  /* Accent: electric cyan from the logo swoosh. */
+  --color-brand-50: #ecfeff;
+  --color-brand-100: #cffafe;
+  --color-brand-200: #a5f3fc;
+  --color-brand-300: #67e8f9;
+  --color-brand-400: #22d3ee;
+  --color-brand-500: #06b6d4;
+  --color-brand-600: #0891b2;
+  --color-brand-700: #0e7490;
+  --color-brand-800: #155e75;
+  --color-brand-900: #164e63;
+
+  /* Night-sky navy surfaces. */
+  --color-night-950: #040914;
+  --color-night-900: #07101f;
+  --color-panel: #0c1729;
+  --color-panel-2: #11203a;
+  --color-line: #1c2d4a;
+  --color-line-strong: #2a4068;
+
+  /* Text on dark. */
+  --color-ink: #e6eefb;
+  --color-ink-soft: #c3d0e6;
+  --color-muted: #8b9bb8;
+  --color-faint: #5d6e8f;
+
   --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
 }
 
-body {
-  @apply bg-stone-50 text-stone-900 antialiased;
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-night-950 text-ink antialiased;
+    background-image:
+      radial-gradient(1200px 500px at 70% -10%, rgb(34 211 238 / 0.08), transparent 60%),
+      radial-gradient(900px 600px at -10% 110%, rgb(37 99 235 / 0.1), transparent 60%);
+    background-attachment: fixed;
+  }
+  ::selection {
+    @apply bg-brand-400/30;
+  }
+}
+
+@utility glow {
+  box-shadow:
+    0 0 0 1px rgb(34 211 238 / 0.35),
+    0 0 24px -4px rgb(34 211 238 / 0.45);
+}
+
+@utility heading-display {
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: -0.02em;
+}
+
+@layer base {
+  input:not([type='checkbox'], [type='radio'], [type='file']),
+  select,
+  textarea {
+    background-color: rgb(4 9 20 / 0.6);
+    color: var(--color-ink);
+  }
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--color-faint);
+  }
 }

@@ -24,7 +24,7 @@ export function ProgressPage() {
 
   return (
     <div className="space-y-4">
-      <Link to="/gym" className="text-sm text-brand-700 hover:underline">
+      <Link to="/gym" className="text-sm text-brand-300 hover:underline">
         ← Back to Gym
       </Link>
       <PageHeader
@@ -42,7 +42,7 @@ export function ProgressPage() {
           <label className="block text-sm font-medium">
             Exercise
             <select
-              className="mt-1 block w-full rounded-lg px-3 py-2 ring-1 ring-stone-300 sm:w-80"
+              className="mt-1 block w-full rounded-lg px-3 py-2 ring-1 ring-line-strong sm:w-80"
               value={slug ?? ''}
               onChange={(e) => setPicked(e.target.value)}
             >
@@ -67,25 +67,33 @@ export function ProgressPage() {
                 >
                   <ResponsiveContainer width="100%" height="100%">
                     <LineChart data={points} margin={{ top: 8, right: 8, bottom: 0, left: -16 }}>
-                      <CartesianGrid stroke="#e7e5e4" vertical={false} />
+                      <CartesianGrid stroke="#1c2d4a" vertical={false} />
                       <XAxis
                         dataKey="label"
-                        tick={{ fontSize: 12, fill: '#78716c' }}
+                        tick={{ fontSize: 12, fill: '#8b9bb8' }}
                         tickLine={false}
                         axisLine={false}
                       />
                       <YAxis
-                        tick={{ fontSize: 12, fill: '#78716c' }}
+                        tick={{ fontSize: 12, fill: '#8b9bb8' }}
                         tickLine={false}
                         axisLine={false}
                         domain={['auto', 'auto']}
                       />
-                      <Tooltip />
+                      <Tooltip
+                        contentStyle={{
+                          background: '#0c1729',
+                          border: '1px solid #2a4068',
+                          borderRadius: 8,
+                          color: '#e6eefb',
+                        }}
+                        labelStyle={{ color: '#8b9bb8' }}
+                      />
                       <Line
                         type="monotone"
                         dataKey="e1rm"
                         name="Est. 1RM (lb)"
-                        stroke="#15803d"
+                        stroke="#22d3ee"
                         strokeWidth={2.5}
                         dot={{ r: 3 }}
                         isAnimationActive={false}
@@ -94,7 +102,7 @@ export function ProgressPage() {
                         type="monotone"
                         dataKey="weight"
                         name="Top weight (lb)"
-                        stroke="#a8a29e"
+                        stroke="#5d6e8f"
                         strokeWidth={2}
                         dot={false}
                         isAnimationActive={false}
@@ -104,7 +112,7 @@ export function ProgressPage() {
                 </div>
                 <table className="mt-4 w-full text-sm">
                   <thead>
-                    <tr className="text-left text-xs text-stone-500">
+                    <tr className="text-left text-xs text-muted">
                       <th className="font-medium">Date</th>
                       <th className="font-medium">Best set</th>
                       <th className="text-right font-medium">Est. 1RM</th>
@@ -112,7 +120,7 @@ export function ProgressPage() {
                   </thead>
                   <tbody className="tabular-nums">
                     {[...points].reverse().map((p) => (
-                      <tr key={p.sessionId} className="border-t border-stone-100">
+                      <tr key={p.sessionId} className="border-t border-line">
                         <td className="py-1.5">{p.label}</td>
                         <td>{p.weight ? `${p.weight} lb × ${p.reps}` : `${p.reps} reps`}</td>
                         <td className="text-right">{p.e1rm || '—'}</td>

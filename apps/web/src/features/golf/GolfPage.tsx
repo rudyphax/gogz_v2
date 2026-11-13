@@ -27,8 +27,8 @@ function ChallengeForm({ friend, onDone }: { friend: Friend; onDone: (sent: bool
     send.mutate({ opponentId: friend.id, prize });
   }
   return (
-    <form onSubmit={onSubmit} className="mt-3 space-y-2 border-t border-stone-100 pt-3">
-      <label htmlFor={`prize-${friend.id}`} className="block text-sm font-medium text-stone-700">
+    <form onSubmit={onSubmit} className="mt-3 space-y-2 border-t border-line pt-3">
+      <label htmlFor={`prize-${friend.id}`} className="block text-sm font-medium text-ink-soft">
         What's on the line?
       </label>
       <input
@@ -39,7 +39,7 @@ function ChallengeForm({ friend, onDone }: { friend: Friend; onDone: (sent: bool
         value={prize}
         onChange={(e) => setPrize(e.target.value)}
         placeholder="Loser buys lunch, $20, carries the bag…"
-        className="w-full rounded-lg border-0 px-3 py-2 text-sm ring-1 ring-stone-300 focus:ring-2 focus:ring-brand-600 focus:outline-none"
+        className="w-full rounded-lg border-0 px-3 py-2 text-sm ring-1 ring-line-strong focus:ring-2 focus:ring-brand-400 focus:outline-none"
       />
       <ErrorText error={send.error} />
       <div className="flex gap-2">
@@ -50,9 +50,7 @@ function ChallengeForm({ friend, onDone }: { friend: Friend; onDone: (sent: bool
           Cancel
         </Button>
       </div>
-      <p className="text-xs text-stone-500">
-        {friend.displayName} gets a text with a link to respond.
-      </p>
+      <p className="text-xs text-muted">{friend.displayName} gets a text with a link to respond.</p>
     </form>
   );
 }
@@ -76,7 +74,10 @@ export function GolfPage() {
       <section>
         <PageHeader title="Golf" subtitle="Pick a friend and put something on the line." />
         {notice && (
-          <p role="status" className="mb-3 rounded-lg bg-brand-50 px-3 py-2 text-sm text-brand-800">
+          <p
+            role="status"
+            className="mb-3 rounded-lg bg-brand-400/10 px-3 py-2 text-sm text-brand-200"
+          >
             {notice}
           </p>
         )}
@@ -103,7 +104,7 @@ export function GolfPage() {
                     <Avatar name={f.displayName} url={f.avatarUrl} />
                     <span className="min-w-0 flex-1">
                       <span className="block truncate font-semibold">{f.displayName}</span>
-                      <span className="block truncate text-xs text-stone-500">
+                      <span className="block truncate text-xs text-muted">
                         {f.firstName} {f.lastName}
                       </span>
                     </span>
@@ -114,7 +115,7 @@ export function GolfPage() {
                       >
                         {f.record.wins}–{f.record.losses}
                       </span>
-                      <span className="block text-[11px] text-stone-500">your record</span>
+                      <span className="block text-[11px] text-muted">your record</span>
                     </span>
                   </button>
                   {selected === f.id && (
@@ -143,7 +144,7 @@ export function GolfPage() {
         ) : (
           GROUPS.filter((g) => grouped.get(g.key)?.length).map((g) => (
             <div key={g.key}>
-              <h2 className="mb-2 text-xs font-bold tracking-wide text-stone-500 uppercase">
+              <h2 className="mb-2 text-xs font-bold tracking-wide text-muted uppercase">
                 {g.title} ({grouped.get(g.key)!.length})
               </h2>
               <div className="space-y-2">

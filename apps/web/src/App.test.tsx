@@ -22,6 +22,8 @@ function renderApp(path: string) {
 const golfApis = [
   http.get('/api/golf/friends', () => HttpResponse.json([])),
   http.get('/api/golf/challenges', () => HttpResponse.json([])),
+  http.get('/api/gym/sessions', () => HttpResponse.json([])),
+  http.get('/api/gym/plans', () => HttpResponse.json([])),
 ];
 
 describe('App routing', () => {
@@ -51,6 +53,7 @@ describe('App routing', () => {
     server.use(
       http.get('/api/me', () => HttpResponse.json({ ...ME, role: 'admin' })),
       http.get('/api/admin/allowed-emails', () => HttpResponse.json([])),
+      ...golfApis,
     );
     renderApp('/admin/members');
     expect(await screen.findByRole('heading', { name: 'Members' })).toBeInTheDocument();
@@ -74,7 +77,9 @@ describe('App routing', () => {
     const user = userEvent.setup();
     renderApp('/nowhere');
     expect(await screen.findByText(/exploring the demo account/)).toBeInTheDocument();
-    await user.click(screen.getByRole('button', { name: 'Log out' }));
+    expect(await screen.findByRole('heading', { name: /Rudy!/ })).toBeInTheDocument();
+    await user.click(screen.getByRole('button', { name: 'Account menu' }));
+    await user.click(screen.getByRole('menuitem', { name: 'Log out' }));
     expect(await screen.findByRole('button', { name: 'Try the demo' })).toBeInTheDocument();
   });
 });

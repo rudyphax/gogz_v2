@@ -106,7 +106,7 @@ describe('Google sign-in', () => {
       .get(`/api/auth/google/callback?code=ok&state=${state}`)
       .set('Cookie', cookies)
       .expect(302);
-    expect(res.headers.location).toBe('/golf');
+    expect(res.headers.location).toBe('/');
     const sessionCookie = cookieHeader(res).find((c) => c.startsWith('gogz_session='))!;
     expect(sessionCookie).toMatch(/HttpOnly/);
     expect(sessionCookie).toMatch(/SameSite=Lax/);
@@ -133,8 +133,8 @@ describe('Google sign-in', () => {
     const { app } = makeApp(db, { google: fakeGoogle() });
     for (const [next, expected] of [
       ['/golf/challenges/abc', '/golf/challenges/abc'],
-      ['//evil.example', '/golf'],
-      ['https://evil.example', '/golf'],
+      ['//evil.example', '/'],
+      ['https://evil.example', '/'],
     ]) {
       const res = await request(app)
         .get(`/api/auth/google?next=${encodeURIComponent(next)}`)

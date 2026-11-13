@@ -53,7 +53,7 @@ export function ChallengeDetailPage() {
 
   return (
     <div className="mx-auto max-w-xl space-y-4">
-      <Link to="/golf" className="text-sm text-brand-700 hover:underline">
+      <Link to="/golf" className="text-sm text-brand-300 hover:underline">
         ← Back to Golf
       </Link>
 
@@ -63,15 +63,13 @@ export function ChallengeDetailPage() {
             <Avatar name={me.displayName} url={me.avatarUrl} size={56} />
             <span className="text-sm font-semibold">You</span>
           </div>
-          <span className="text-lg font-black text-stone-300">VS</span>
+          <span className="text-lg font-black text-faint">VS</span>
           <div className="flex flex-col items-center gap-1">
             <Avatar name={them.displayName} url={them.avatarUrl} size={56} />
             <span className="text-sm font-semibold">{them.displayName}</span>
           </div>
         </div>
-        <p className="mt-5 text-xs font-semibold tracking-wide text-stone-500 uppercase">
-          On the line
-        </p>
+        <p className="mt-5 text-xs font-semibold tracking-wide text-muted uppercase">On the line</p>
         <p className="mt-1 text-2xl font-bold" data-testid="prize">
           {challenge.prize}
         </p>
@@ -79,7 +77,7 @@ export function ChallengeDetailPage() {
           <Badge tone={status.tone}>{status.label}</Badge>
         </div>
         {winnerName && challenge.status === 'result_reported' && (
-          <p className="mt-3 text-sm text-stone-600">Reported winner: {winnerName}</p>
+          <p className="mt-3 text-sm text-muted">Reported winner: {winnerName}</p>
         )}
         {challenge.status === 'completed' && (
           <p className="mt-3 text-sm font-semibold">
@@ -103,7 +101,7 @@ export function ChallengeDetailPage() {
                 maxLength={MAX_PRIZE_LENGTH}
                 value={counterPrize}
                 onChange={(e) => setCounterPrize(e.target.value)}
-                className="w-full rounded-lg border-0 px-3 py-2 text-sm ring-1 ring-stone-300 focus:ring-2 focus:ring-brand-600 focus:outline-none"
+                className="w-full rounded-lg border-0 px-3 py-2 text-sm ring-1 ring-line-strong focus:ring-2 focus:ring-brand-400 focus:outline-none"
               />
               <div className="flex gap-2">
                 <Button type="submit" disabled={act.isPending || !counterPrize.trim()}>
@@ -153,9 +151,7 @@ export function ChallengeDetailPage() {
               )}
               {can.has('report') && (
                 <>
-                  <p className="w-full text-sm text-stone-600">
-                    Round finished? Report the result:
-                  </p>
+                  <p className="w-full text-sm text-muted">Round finished? Report the result:</p>
                   <Button
                     disabled={act.isPending}
                     onClick={() => act.mutate({ type: 'report', winnerId: me.id })}
@@ -201,7 +197,7 @@ export function ChallengeDetailPage() {
                   {EVENT_TEXT[e.type] ?? e.type}
                   {e.prize && e.type === 'counter' ? `: “${e.prize}”` : ''}
                 </span>
-                <time className="shrink-0 text-xs text-stone-500" dateTime={e.createdAt}>
+                <time className="shrink-0 text-xs text-muted" dateTime={e.createdAt}>
                   {new Date(e.createdAt).toLocaleDateString(undefined, {
                     month: 'short',
                     day: 'numeric',

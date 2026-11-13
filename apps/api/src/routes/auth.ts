@@ -22,7 +22,7 @@ export function safeNext(next: unknown): string {
     !next.startsWith('//') &&
     !next.includes('\\')
     ? next
-    : '/golf';
+    : '/';
 }
 
 export function authRoutes({ db, config, google }: AppDeps) {

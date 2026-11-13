@@ -31,16 +31,16 @@ const renderLogin = (path = '/login') =>
   renderAt(<LoginPage />, {
     path,
     route: '/login',
-    extra: { '/golf': <p>Golf home</p>, '/golf/challenges/:id': <p>Challenge page</p> },
+    extra: { '/': <p>Home page</p>, '/golf/challenges/:id': <p>Challenge page</p> },
   });
 
 describe('safeNext', () => {
   it.each([
-    [null, '/golf'],
+    [null, '/'],
     ['/gym', '/gym'],
-    ['//evil.com', '/golf'],
-    ['https://evil.com', '/golf'],
-    ['/\\evil.com', '/golf'],
+    ['//evil.com', '/'],
+    ['https://evil.com', '/'],
+    ['/\\evil.com', '/'],
   ])('%s → %s', (input, expected) => expect(safeNext(input)).toBe(expected));
 });
 
@@ -85,6 +85,6 @@ describe('LoginPage', () => {
     const user = userEvent.setup();
     renderLogin();
     await user.click(await screen.findByRole('button', { name: 'Try the demo' }));
-    expect(await screen.findByText('Golf home')).toBeInTheDocument();
+    expect(await screen.findByText('Home page')).toBeInTheDocument();
   });
 });

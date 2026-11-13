@@ -20,7 +20,7 @@ export function Avatar({
     <span
       aria-hidden
       style={style}
-      className="inline-flex shrink-0 items-center justify-center rounded-full bg-brand-100 font-semibold text-brand-800"
+      className="inline-flex shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-brand-500 to-blue-700 font-bold text-white"
     >
       {initials || '?'}
     </span>

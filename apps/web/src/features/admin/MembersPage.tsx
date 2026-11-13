@@ -56,7 +56,7 @@ export function MembersPage() {
         <ErrorText error={members.error} />
       ) : (
         <ul
-          className="divide-y divide-stone-100 rounded-xl bg-white ring-1 ring-stone-200"
+          className="divide-y divide-line rounded-xl bg-panel ring-1 ring-line"
           aria-label="Invited emails"
         >
           {members.data.map((m) => (
@@ -67,7 +67,7 @@ export function MembersPage() {
               {m.email !== me?.email && (
                 <Button
                   variant="ghost"
-                  className="!px-2 !py-1 text-xs text-red-700"
+                  className="!px-2 !py-1 text-xs text-red-300"
                   onClick={() => {
                     if (confirm(`Remove ${m.email}? They'll be signed out and can't sign back in.`))
                       remove.mutate(m.email);

@@ -44,13 +44,13 @@ export function GymPage() {
           <div className="flex gap-2">
             <Link
               to="/gym/progress"
-              className="rounded-lg px-3 py-2 text-sm font-semibold text-brand-800 ring-1 ring-brand-200 hover:bg-brand-50"
+              className="rounded-lg px-3 py-2 text-sm font-semibold text-brand-200 ring-1 ring-brand-400/40 hover:bg-brand-400/10"
             >
               Progress
             </Link>
             <Link
               to="/gym/plans/new"
-              className="rounded-lg bg-brand-700 px-3 py-2 text-sm font-semibold text-white hover:bg-brand-800"
+              className="rounded-lg bg-brand-400 px-3 py-2 text-sm font-semibold text-night-950 hover:bg-brand-300"
             >
               New plan
             </Link>
@@ -67,7 +67,7 @@ export function GymPage() {
       ) : !active ? (
         <Empty>
           No plan yet.{' '}
-          <Link to="/gym/plans/new" className="font-semibold text-brand-700 underline">
+          <Link to="/gym/plans/new" className="font-semibold text-brand-300 underline">
             Build one from your goals
           </Link>
           .
@@ -83,13 +83,13 @@ export function GymPage() {
               <Card key={day.id} className="flex flex-col">
                 <div className="mb-2 flex items-center justify-between">
                   <h3 className="font-bold">{day.name}</h3>
-                  <span className="text-xs text-stone-500">{day.exercises.length} exercises</span>
+                  <span className="text-xs text-muted">{day.exercises.length} exercises</span>
                 </div>
-                <ul className="mb-4 flex-1 space-y-1 text-sm text-stone-600">
+                <ul className="mb-4 flex-1 space-y-1 text-sm text-muted">
                   {day.exercises.map((e) => (
                     <li key={e.id} className="flex justify-between gap-2">
                       <span className="truncate">{e.exerciseName}</span>
-                      <span className="shrink-0 tabular-nums text-stone-400">
+                      <span className="shrink-0 tabular-nums text-faint">
                         {e.sets}×{e.repMin}–{e.repMax}
                       </span>
                     </li>
@@ -109,7 +109,7 @@ export function GymPage() {
       )}
 
       <section aria-label="Recent workouts">
-        <h2 className="mb-2 text-xs font-bold tracking-wide text-stone-500 uppercase">
+        <h2 className="mb-2 text-xs font-bold tracking-wide text-muted uppercase">
           Recent workouts
         </h2>
         {sessions.isPending ? (
@@ -117,15 +117,15 @@ export function GymPage() {
         ) : !sessions.data?.length ? (
           <Empty>Your logged workouts will show up here.</Empty>
         ) : (
-          <ul className="divide-y divide-stone-100 rounded-xl bg-white ring-1 ring-stone-200">
+          <ul className="divide-y divide-line rounded-xl bg-panel ring-1 ring-line">
             {sessions.data.slice(0, 10).map((s) => (
               <li key={s.id}>
                 <Link
                   to={`/gym/sessions/${s.id}`}
-                  className="flex items-center justify-between gap-3 px-4 py-3 text-sm hover:bg-stone-50"
+                  className="flex items-center justify-between gap-3 px-4 py-3 text-sm hover:bg-white/5"
                 >
                   <span className="font-semibold">{s.planDayName}</span>
-                  <span className="flex items-center gap-2 text-stone-500">
+                  <span className="flex items-center gap-2 text-muted">
                     {!s.completedAt && <Badge tone="amber">In progress</Badge>}
                     {s.setCount} sets · {formatDate(s.startedAt)}
                   </span>
@@ -138,14 +138,12 @@ export function GymPage() {
 
       {others.length > 0 && (
         <section aria-label="Other plans">
-          <h2 className="mb-2 text-xs font-bold tracking-wide text-stone-500 uppercase">
-            Other plans
-          </h2>
+          <h2 className="mb-2 text-xs font-bold tracking-wide text-muted uppercase">Other plans</h2>
           <ul className="space-y-2">
             {others.map((p) => (
               <li
                 key={p.id}
-                className="flex flex-wrap items-center justify-between gap-2 rounded-xl bg-white px-4 py-3 text-sm ring-1 ring-stone-200"
+                className="flex flex-wrap items-center justify-between gap-2 rounded-xl bg-panel px-4 py-3 text-sm ring-1 ring-line"
               >
                 <span className="font-medium">{p.name}</span>
                 <span className="flex gap-2">

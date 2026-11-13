@@ -76,8 +76,8 @@ export function NewPlanPage() {
                 className={cx(
                   'cursor-pointer rounded-lg p-3 ring-1 transition',
                   goal === g
-                    ? 'bg-brand-50 ring-2 ring-brand-600'
-                    : 'ring-stone-200 hover:ring-stone-400',
+                    ? 'bg-brand-400/10 ring-2 ring-brand-400'
+                    : 'ring-line hover:ring-white/30',
                 )}
               >
                 <input
@@ -89,7 +89,7 @@ export function NewPlanPage() {
                   className="sr-only"
                 />
                 <span className="block text-sm font-semibold">{GOAL_LABELS[g]}</span>
-                <span className="block text-xs text-stone-500">{GOAL_HINTS[g]}</span>
+                <span className="block text-xs text-muted">{GOAL_HINTS[g]}</span>
               </label>
             ))}
           </div>
@@ -106,8 +106,8 @@ export function NewPlanPage() {
                 className={cx(
                   'flex h-11 w-11 cursor-pointer items-center justify-center rounded-lg text-sm font-bold ring-1',
                   daysPerWeek === d
-                    ? 'bg-brand-700 text-white ring-brand-700'
-                    : 'ring-stone-300 hover:bg-stone-100',
+                    ? 'bg-brand-400 text-night-950 ring-brand-400 glow'
+                    : 'ring-line-strong hover:bg-white/5',
                 )}
               >
                 <input
@@ -135,7 +135,7 @@ export function NewPlanPage() {
                   type="checkbox"
                   checked={equipment.includes(eq)}
                   onChange={() => toggle(eq)}
-                  className="h-4 w-4 rounded accent-brand-700"
+                  className="h-4 w-4 rounded accent-brand-400"
                 />
                 {EQUIPMENT_LABELS[eq]}
               </label>

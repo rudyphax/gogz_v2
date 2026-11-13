@@ -58,28 +58,28 @@ function ExerciseCard({
     <Card>
       <div className="mb-1 flex flex-wrap items-baseline justify-between gap-2">
         <h2 className="font-bold">{exercise.exerciseName}</h2>
-        <span className="text-xs text-stone-500 tabular-nums">
+        <span className="text-xs text-muted tabular-nums">
           Target {exercise.sets} × {exercise.repMin}–{exercise.repMax}
         </span>
       </div>
-      <p className="text-xs text-stone-500">
+      <p className="text-xs text-muted">
         Last time:{' '}
         {exercise.lastSets.length
           ? fmtSets(exercise.lastSets)
           : 'first time, so find a weight that hits the range'}
       </p>
       {exercise.suggestion && (
-        <p className="mt-1 text-xs font-medium text-brand-800">
+        <p className="mt-1 text-xs font-medium text-brand-200">
           Today:{' '}
           {exercise.suggestion.weight
             ? `${exercise.suggestion.weight} lb × ${exercise.suggestion.reps}`
             : `${exercise.suggestion.reps} reps`}
-          <span className="font-normal text-stone-500"> · {exercise.suggestion.reason}</span>
+          <span className="font-normal text-muted"> · {exercise.suggestion.reason}</span>
         </p>
       )}
       <table className="mt-3 w-full text-sm">
         <thead>
-          <tr className="text-left text-xs text-stone-500">
+          <tr className="text-left text-xs text-muted">
             <th className="w-12 font-medium">Set</th>
             <th className="font-medium">Weight (lb)</th>
             <th className="font-medium">Reps</th>
@@ -88,7 +88,7 @@ function ExerciseCard({
         <tbody>
           {rows.map((r, i) => (
             <tr key={i}>
-              <td className="py-1 text-stone-500">{i + 1}</td>
+              <td className="py-1 text-muted">{i + 1}</td>
               <td className="py-1 pr-2">
                 <input
                   aria-label={`${exercise.exerciseName} set ${i + 1} weight`}
@@ -96,7 +96,7 @@ function ExerciseCard({
                   value={r.weight}
                   disabled={disabled}
                   onChange={(e) => update(i, { weight: e.target.value })}
-                  className="w-full rounded-md px-2 py-1.5 ring-1 ring-stone-300 focus:ring-2 focus:ring-brand-600 focus:outline-none"
+                  className="w-full rounded-md px-2 py-1.5 ring-1 ring-line-strong focus:ring-2 focus:ring-brand-400 focus:outline-none"
                 />
               </td>
               <td className="py-1">
@@ -109,7 +109,7 @@ function ExerciseCard({
                   }
                   disabled={disabled}
                   onChange={(e) => update(i, { reps: e.target.value })}
-                  className="w-full rounded-md px-2 py-1.5 ring-1 ring-stone-300 focus:ring-2 focus:ring-brand-600 focus:outline-none"
+                  className="w-full rounded-md px-2 py-1.5 ring-1 ring-line-strong focus:ring-2 focus:ring-brand-400 focus:outline-none"
                 />
               </td>
             </tr>
@@ -180,19 +180,19 @@ function SessionEditor({ session }: { session: SessionDto }) {
 
   return (
     <div className="mx-auto max-w-2xl space-y-4">
-      <Link to="/gym" className="text-sm text-brand-700 hover:underline">
+      <Link to="/gym" className="text-sm text-brand-300 hover:underline">
         ← Back to Gym
       </Link>
       <div className="flex flex-wrap items-center gap-2">
         <h1 className="text-2xl font-bold">{session.planDayName}</h1>
         {done ? <Badge tone="green">Completed</Badge> : <Badge tone="amber">In progress</Badge>}
-        <span className="text-sm text-stone-500">
+        <span className="text-sm text-muted">
           {new Date(session.startedAt).toLocaleDateString()}
         </span>
       </div>
 
       {session.exercises.length === 0 && (
-        <p className="text-sm text-stone-500">
+        <p className="text-sm text-muted">
           This workout's plan was deleted, but its logged sets are still in your history.
         </p>
       )}
@@ -210,7 +210,7 @@ function SessionEditor({ session }: { session: SessionDto }) {
       ))}
 
       <ErrorText error={save.error ?? finish.error ?? remove.error} />
-      <div className="sticky bottom-0 -mx-4 flex flex-wrap gap-2 border-t border-stone-200 bg-stone-50/95 px-4 py-3 backdrop-blur">
+      <div className="sticky bottom-0 -mx-4 flex flex-wrap gap-2 border-t border-line bg-night-950/90 px-4 py-3 backdrop-blur">
         {!done && (
           <>
             <Button disabled={busy} onClick={() => finish.mutate(rowsToSets(rows))}>
@@ -227,7 +227,7 @@ function SessionEditor({ session }: { session: SessionDto }) {
         )}
         <Button
           variant="ghost"
-          className="ml-auto text-red-700"
+          className="ml-auto text-red-300"
           disabled={busy}
           onClick={() => {
             if (confirm('Delete this workout and its sets?')) remove.mutate(undefined);

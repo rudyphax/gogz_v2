@@ -91,7 +91,7 @@ function DetailsForm({ me }: { me: Me }) {
       <label className="flex items-start gap-2 text-sm">
         <input
           type="checkbox"
-          className="mt-0.5 h-4 w-4 accent-brand-700"
+          className="mt-0.5 h-4 w-4 accent-brand-400"
           checked={form.smsOptIn}
           disabled={!form.phone.trim()}
           onChange={(e) => set({ smsOptIn: e.target.checked })}
@@ -107,7 +107,7 @@ function DetailsForm({ me }: { me: Me }) {
           Save changes
         </Button>
         {saved && (
-          <span role="status" className="text-sm text-brand-700">
+          <span role="status" className="text-sm text-brand-300">
             Saved
           </span>
         )}
@@ -144,7 +144,7 @@ function PasswordForm({ me }: { me: Me }) {
       }}
       className="space-y-4"
     >
-      <p className="text-sm text-stone-600">
+      <p className="text-sm text-muted">
         {me.hasPassword
           ? 'Change the password you use to sign in without Google.'
           : 'Optional: set a password so you can also sign in with your email.'}
@@ -177,7 +177,7 @@ function PasswordForm({ me }: { me: Me }) {
           {me.hasPassword ? 'Change password' : 'Set password'}
         </Button>
         {done && (
-          <span role="status" className="text-sm text-brand-700">
+          <span role="status" className="text-sm text-brand-300">
             Password saved
           </span>
         )}
@@ -240,7 +240,7 @@ function AvatarForm({ me }: { me: Me }) {
             upload.mutate(file);
           }}
         />
-        <p className="text-xs text-stone-500">JPEG, PNG, WebP or GIF, up to {MAX_AVATAR_MB} MB.</p>
+        <p className="text-xs text-muted">JPEG, PNG, WebP or GIF, up to {MAX_AVATAR_MB} MB.</p>
         <ErrorText error={localError ? new Error(localError) : (upload.error ?? remove.error)} />
       </div>
     </div>
@@ -256,9 +256,7 @@ export function ProfilePage() {
       <PageHeader title="Profile" subtitle={me.email} />
       {demo ? (
         <Card>
-          <p className="text-sm text-stone-600">
-            Profile editing is turned off for the demo account.
-          </p>
+          <p className="text-sm text-muted">Profile editing is turned off for the demo account.</p>
         </Card>
       ) : (
         <>

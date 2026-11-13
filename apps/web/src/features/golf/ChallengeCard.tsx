@@ -11,14 +11,14 @@ export function ChallengeCard({ challenge, meId }: { challenge: ChallengeDto; me
   return (
     <Link
       to={`/golf/challenges/${challenge.id}`}
-      className="flex items-center gap-3 rounded-xl bg-white p-3 shadow-sm ring-1 ring-stone-200 transition hover:ring-brand-500"
+      className="flex items-center gap-3 rounded-xl bg-panel p-3 shadow-sm ring-1 ring-line transition hover:ring-brand-400"
     >
       <Avatar name={them.displayName} url={them.avatarUrl} size={36} />
       <div className="min-w-0 flex-1">
         <p className="truncate text-sm font-semibold">
           {iSent ? `You → ${them.displayName}` : `${them.displayName} → You`}
         </p>
-        <p className="truncate text-sm text-stone-500">{challenge.prize}</p>
+        <p className="truncate text-sm text-muted">{challenge.prize}</p>
       </div>
       <Badge tone={status.tone}>{status.label}</Badge>
     </Link>

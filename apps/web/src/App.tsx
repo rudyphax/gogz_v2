@@ -7,6 +7,7 @@ import { MembersPage } from './features/admin/MembersPage';
 import { LoginPage } from './features/auth/LoginPage';
 import { ChallengeDetailPage } from './features/golf/ChallengeDetailPage';
 import { GolfPage } from './features/golf/GolfPage';
+import { HomePage } from './features/home/HomePage';
 import { GymPage } from './features/gym/GymPage';
 import { NewPlanPage } from './features/gym/NewPlanPage';
 import { SessionPage } from './features/gym/SessionPage';
@@ -39,7 +40,7 @@ export function App() {
     <Routes>
       <Route path="/login" element={<LoginPage />} />
       <Route element={<RequireAuth />}>
-        <Route index element={<Navigate to="/golf" replace />} />
+        <Route index element={<HomePage />} />
         <Route path="golf" element={<GolfPage />} />
         <Route path="golf/challenges/:id" element={<ChallengeDetailPage />} />
         <Route path="gym" element={<GymPage />} />
@@ -57,7 +58,7 @@ export function App() {
         <Route element={<AdminOnly />}>
           <Route path="admin/members" element={<MembersPage />} />
         </Route>
-        <Route path="*" element={<Navigate to="/golf" replace />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
     </Routes>
   );
