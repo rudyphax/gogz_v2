@@ -119,11 +119,17 @@ allowlist check as the real Google callback. It's only mounted when `NODE_ENV=te
    DATABASE_URL="<neon url>" ADMIN_EMAIL="you@gmail.com" npm run db:migrate
    DATABASE_URL="<neon url>" ADMIN_EMAIL="you@gmail.com" npm run db:seed
    ```
-3. **Google sign-in**: in Google Cloud Console → APIs & Services → Credentials, create an OAuth
-   client ID (Web application). Add these authorized redirect URIs:
-   `https://<your-domain>/api/auth/google/callback` and
-   `http://localhost:5173/api/auth/google/callback`. Set `GOOGLE_CLIENT_ID` and
-   `GOOGLE_CLIENT_SECRET` in Vercel.
+3. **Google sign-in**: in Google Cloud Console → **Google Auth Platform**:
+   - **Branding**: app name and support email.
+   - **Audience**: External. Either publish the app, or leave it in Testing and add each
+     friend's Gmail as a test user. It only asks for basic profile and email access, so
+     publishing doesn't need Google's review.
+   - **Clients → Create client** (Web application). Leave **Authorized JavaScript origins** empty;
+     the app signs in through a server redirect, not a browser script. Add these **Authorized
+     redirect URIs**: `http://localhost:5173/api/auth/google/callback` and
+     `https://<your-vercel-domain>/api/auth/google/callback`.
+   - Copy the client ID and secret into `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` (in `.env`
+     locally and in Vercel's environment variables).
 4. **Texts**: create a Twilio account and buy a number. US texting requires registration;
    **toll-free verification** is the simplest route for a small app and takes a few days. Set
    `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN` and `TWILIO_FROM_NUMBER`.
